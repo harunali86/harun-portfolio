@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import NavBar from "./components/NavBar";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,6 +55,19 @@ export default function RootLayout({
           <NavBar />
           {children}
         </ThemeProvider>
+        <Script id="jsonld" type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Harun Shaikh",
+            url: "https://harunali86.github.io/harun-portfolio/next-site",
+            sameAs: [
+              "https://github.com/harunali86",
+              "https://www.linkedin.com/in/harun-shaikh-0947751ba"
+            ],
+            jobTitle: "Full Stack Developer",
+          })}
+        </Script>
       </body>
     </html>
   );

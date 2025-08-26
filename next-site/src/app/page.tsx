@@ -1,9 +1,11 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import FlipCard from "./components/FlipCard";
 import Typewriter from "./components/Typewriter";
 import BackToTop from "./components/BackToTop";
 import ContactSection from "./components/ContactSection";
+import HeroScene from "./components/HeroScene";
 
 const container = {
   hidden: { opacity: 0 },
@@ -20,9 +22,12 @@ const item = {
 export default function Home() {
   return (
     <main className="min-h-screen font-sans">
+      {/* subtle click sound across site */}
+      {/* eslint-disable-next-line @next/next/no-sync-scripts */}
       {/* Hero */}
       <section id="hero" className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_50%_at_20%_10%,rgba(34,211,238,.15),transparent_50%),radial-gradient(80%_50%_at_80%_20%,rgba(168,85,247,.15),transparent_50%),radial-gradient(80%_60%_at_50%_80%,rgba(34,197,94,.12),transparent_60%)]" />
+        <HeroScene />
         <div className="container mx-auto px-6 py-28 sm:py-36">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl">
             <p className="text-sm uppercase tracking-widest text-cyan-500">Portfolio</p>
@@ -81,39 +86,34 @@ export default function Home() {
       {/* Projects */}
       <section id="projects" className="container mx-auto px-6 py-20">
         <h2 className="text-2xl sm:text-3xl font-semibold">Projects</h2>
-        <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            {
-              title: "AI Agents for Finance",
-              desc: "Multi-agent system comparing stocks and generating insights.",
-              img: "https://images.unsplash.com/photo-1518186233392-c232efbf2373?q=80&w=1200&auto=format&fit=crop",
-            },
-            {
-              title: "E-Commerce Website",
-              desc: "Responsive platform with inventory and orders.",
-              img: "https://images.unsplash.com/photo-1519337265831-281ec6cc8514?q=80&w=1200&auto=format&fit=crop",
-            },
-            {
-              title: "Customer Churn Prediction",
-              desc: "ML model with Power BI dashboard.",
-              img: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop",
-            },
-          ].map((p) => (
-            <motion.article key={p.title} variants={item} className="group rounded-xl overflow-hidden border hover:shadow-lg transition">
-              <div className="aspect-[16/9] overflow-hidden">
-                <Image src={p.img} alt={p.title} width={800} height={450} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <div className="mt-6 overflow-x-auto [scroll-snap-type:x_mandatory] hide-scrollbar">
+          <div className="flex gap-6 min-w-full pr-6">
+            {[
+              {
+                title: "AI Agents for Finance",
+                desc: "Multi-agent system comparing stocks and generating insights.",
+                img: "https://images.unsplash.com/photo-1518186233392-c232efbf2373?q=80&w=1200&auto=format&fit=crop",
+                tags: ["AI","Agents","Finance"],
+              },
+              {
+                title: "E-Commerce Website",
+                desc: "Responsive platform with inventory and orders.",
+                img: "https://images.unsplash.com/photo-1519337265831-281ec6cc8514?q=80&w=1200&auto=format&fit=crop",
+                tags: ["Next.js","Stripe","Postgres"],
+              },
+              {
+                title: "Customer Churn Prediction",
+                desc: "ML model with Power BI dashboard.",
+                img: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop",
+                tags: ["Python","Pandas","ML"],
+              },
+            ].map((p) => (
+              <div key={p.title} className="w-80 flex-shrink-0 [scroll-snap-align:start]">
+                <FlipCard title={p.title} desc={p.desc} img={p.img} tags={p.tags} />
               </div>
-              <div className="p-4">
-                <h3 className="font-medium">{p.title}</h3>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">{p.desc}</p>
-                <div className="mt-3 flex gap-3">
-                  <a href="https://github.com/harunali86" className="text-sm text-cyan-600 dark:text-cyan-400 hover:underline">GitHub</a>
-                  <a href="#" className="text-sm text-cyan-600 dark:text-cyan-400 hover:underline">Live Demo</a>
-                </div>
-              </div>
-            </motion.article>
-          ))}
-        </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Experience */}
