@@ -6,6 +6,7 @@ import Typewriter from "./components/Typewriter";
 import BackToTop from "./components/BackToTop";
 import ContactSection from "./components/ContactSection";
 import HeroScene from "./components/HeroScene";
+import Testimonials from "./components/Testimonials";
 
 const container = {
   hidden: { opacity: 0 },
@@ -127,6 +128,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Testimonials */}
+      <Testimonials />
 
       {/* Contact */}
       <ContactSection />
