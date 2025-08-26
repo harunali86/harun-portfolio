@@ -1,6 +1,6 @@
 "use client";
 import { Canvas } from "@react-three/fiber";
-import { Float, Points, PointMaterial, OrbitControls } from "@react-three/drei";
+import { Float, Points, PointMaterial, OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
 import { Suspense, useMemo } from "react";
 
 function Stars() {
@@ -23,8 +23,11 @@ export default function ContactScene() {
       <Suspense fallback={null}>
         <Canvas camera={{ position: [0, 0, 4], fov: 50 }}>
           <color attach="background" args={["#000000"]} />
-          <Float speed={1.5} rotationIntensity={1} floatIntensity={1.2}>
+          <Float speed={1.6} rotationIntensity={1.2} floatIntensity={1.2}>
             <Stars />
+            <Sphere args={[1.2, 32, 32]} position={[0, 0, -1]}>
+              <MeshDistortMaterial color="#0ea5e9" speed={2.5} distort={0.4} roughness={0.2} transparent opacity={0.25} />
+            </Sphere>
           </Float>
           <ambientLight intensity={0.4} />
           <pointLight position={[5, 5, 5]} intensity={1} color="#a855f7" />

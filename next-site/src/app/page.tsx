@@ -27,7 +27,13 @@ export default function Home() {
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl">
             <p className="text-sm uppercase tracking-widest text-cyan-500">Portfolio</p>
             <h1 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight">
-              Harun Shaikh
+              <motion.span initial="hidden" animate="show" variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 }}}} className="inline-block">
+                {"Harun Shaikh".split("").map((ch, i) => (
+                  <motion.span key={i} variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0, transition: { duration: 0.4 }}}} className="inline-block">
+                    {ch === " " ? "\u00A0" : ch}
+                  </motion.span>
+                ))}
+              </motion.span>
               <span className="block text-balance text-zinc-500 dark:text-zinc-400 text-lg sm:text-xl mt-3">
                 <Typewriter words={["Full Stack Developer", "Data Analyst", "Software Engineer"]} />
               </span>

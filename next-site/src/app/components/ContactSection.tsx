@@ -4,6 +4,8 @@ import ContactScene from "./ContactScene";
 import confetti from "canvas-confetti";
 import { useState } from "react";
 import { Github, Mail, Linkedin } from "lucide-react";
+import MagneticButton from "./MagneticButton";
+import VoiceInput from "./VoiceInput";
 
 export default function ContactSection() {
   const [loading, setLoading] = useState(false);
@@ -43,8 +45,8 @@ export default function ContactSection() {
         Let’s Build Something Amazing Together 🚀
       </motion.h2>
       <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
-        className="mt-10 mx-auto max-w-3xl rounded-2xl border border-white/20 dark:border-white/10 bg-white/10 dark:bg-black/20 backdrop-blur-xl shadow-[0_0_1px_1px_rgba(255,255,255,0.05)]">
-        <div className="p-[1px] rounded-2xl bg-gradient-to-br from-cyan-500/40 via-transparent to-fuchsia-500/40">
+        className="mt-10 mx-auto max-w-3xl rounded-2xl border border-white/20 dark:border-white/10 bg-white/5 dark:bg-black/10 backdrop-blur-xl shadow-[0_0_30px_rgba(34,211,238,0.15)]">
+        <div className="p-[1px] rounded-2xl bg-[conic-gradient(at_20%_20%,rgba(34,211,238,0.5),transparent_30%,rgba(168,85,247,0.5)_70%)]">
           <div className="rounded-2xl bg-white/10 dark:bg-black/30 p-6 sm:p-8">
             <form onSubmit={onSubmit} className="space-y-4">
               <div>
@@ -62,10 +64,14 @@ export default function ContactSection() {
               {error ? <p className="text-sm text-red-500">{error}</p> : null}
               {success ? <p className="text-sm text-green-500">Thanks! I will get back to you shortly.</p> : null}
               <div className="flex items-center gap-3">
-                <button disabled={loading} className="rounded-md border px-5 py-2.5 text-sm bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-500/30 hover:bg-cyan-500/20 transition disabled:opacity-60">
+                <MagneticButton disabled={loading} className="group border-cyan-500/40 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)]">
                   {loading ? "Sending..." : "Send Message"}
-                </button>
+                </MagneticButton>
                 <a href="/Harun-Shaikh-Resume.pdf" className="rounded-md border px-5 py-2.5 text-sm hover:bg-white/10 dark:hover:bg-white/5 transition">Download Resume</a>
+                <VoiceInput onResult={(t)=>{
+                  const ta = document.querySelector<HTMLTextAreaElement>('textarea[name="message"]');
+                  if (ta) ta.value = (ta.value + ' ' + t).trim();
+                }} />
               </div>
             </form>
 
