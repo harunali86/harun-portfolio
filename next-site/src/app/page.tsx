@@ -57,6 +57,16 @@ export default function Home() {
               </a>
             </div>
           </motion.div>
+          <div className="mt-10 overflow-hidden">
+            <div className="flex items-center gap-10 animate-[marquee_18s_linear_infinite] whitespace-nowrap text-sm opacity-70">
+              {Array.from({ length: 2 }).flatMap(() => ["React","Next.js","Tailwind","TypeScript","Python","Postgres","Framer Motion","Three.js"]).map((t,i)=> (
+                <span key={i} className="inline-flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-fuchsia-500"/>
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

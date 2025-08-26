@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import NavBar from "./components/NavBar";
 import Script from "next/script";
 import ScrollProgress from "./components/ScrollProgress";
+import GrainOverlay from "./components/GrainOverlay";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,6 +55,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ScrollProgress />
+          <GrainOverlay />
           <NavBar />
           {children}
         </ThemeProvider>

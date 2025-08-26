@@ -6,6 +6,7 @@ export default function FlipCard({ title, desc, img, tags }: { title: string; de
   const [flipped, setFlipped] = useState(false);
   return (
     <div className="[perspective:1200px] group" onMouseEnter={() => setFlipped(true)} onMouseLeave={() => setFlipped(false)}>
+      <div className="absolute inset-0 rounded-xl opacity-60 blur-md pointer-events-none group-hover:opacity-90 transition" style={{ background: "linear-gradient(90deg, rgba(34,211,238,.15), rgba(168,85,247,.15))" }}/>
       <div className={`relative h-64 w-full rounded-xl border transition-transform duration-500 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}>
         <div className="absolute inset-0 overflow-hidden rounded-xl [backface-visibility:hidden]">
           <Image src={img} alt={title} width={800} height={450} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
