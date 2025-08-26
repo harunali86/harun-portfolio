@@ -7,6 +7,7 @@ import BackToTop from "./components/BackToTop";
 import ContactSection from "./components/ContactSection";
 import HeroScene from "./components/HeroScene";
 import Testimonials from "./components/Testimonials";
+import useScrollSound from "./components/useScrollSound";
 
 const container = {
   hidden: { opacity: 0 },
@@ -21,6 +22,7 @@ const item = {
 };
 
 export default function Home() {
+  useScrollSound();
   return (
     <main className="min-h-screen font-sans">
       {/* subtle click sound across site */}
