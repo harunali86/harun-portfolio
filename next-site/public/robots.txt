@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://harunali86.github.io/harun-portfolio/sitemap.xml
+Sitemap: https://harunali86.github.io/harun-portfolio/next-site/sitemap.xml
 
