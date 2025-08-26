@@ -8,6 +8,8 @@ import ContactSection from "./components/ContactSection";
 import HeroScene from "./components/HeroScene";
 import Testimonials from "./components/Testimonials";
 import useScrollSound from "./components/useScrollSound";
+import Counter from "./components/Counter";
+import SkillsRadial from "./components/SkillsRadial";
 
 const container = {
   hidden: { opacity: 0 },
@@ -72,19 +74,23 @@ export default function Home() {
             <Image src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop" alt="Developer at work" width={560} height={360} className="rounded-xl shadow-lg" />
           </motion.div>
         </motion.div>
+        <div className="mt-8 grid grid-cols-3 gap-6 text-center">
+          <div>
+            <Counter to={3} suffix="+" />
+            <p className="text-xs opacity-70">Years Experience</p>
+          </div>
+          <div>
+            <Counter to={12} suffix="+" />
+            <p className="text-xs opacity-70">Projects</p>
+          </div>
+          <div>
+            <Counter to={20} suffix="+" />
+            <p className="text-xs opacity-70">Skills</p>
+          </div>
+        </div>
       </section>
 
-      {/* Skills */}
-      <section id="skills" className="container mx-auto px-6 py-20">
-        <h2 className="text-2xl sm:text-3xl font-semibold">Skills</h2>
-        <motion.ul variants={container} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-          {["HTML","CSS","JavaScript","React","Next.js","Python","SQL","PostgreSQL","Pandas","NumPy","Power BI","Git"].map((skill)=> (
-            <motion.li key={skill} variants={item} className="rounded-lg border px-3 py-2 text-sm text-center hover:shadow-sm transition">
-              {skill}
-            </motion.li>
-          ))}
-        </motion.ul>
-      </section>
+      <SkillsRadial />
 
       {/* Projects */}
       <section id="projects" className="container mx-auto px-6 py-20">
@@ -95,19 +101,19 @@ export default function Home() {
               {
                 title: "AI Agents for Finance",
                 desc: "Multi-agent system comparing stocks and generating insights.",
-                img: "https://images.unsplash.com/photo-1518186233392-c232efbf2373?q=80&w=1200&auto=format&fit=crop",
+                img: "https://images.unsplash.com/photo-1518186233392-c232efbf2373?q=80&w=1200&auto=format&fit=crop&fm=avif",
                 tags: ["AI","Agents","Finance"],
               },
               {
                 title: "E-Commerce Website",
                 desc: "Responsive platform with inventory and orders.",
-                img: "https://images.unsplash.com/photo-1519337265831-281ec6cc8514?q=80&w=1200&auto=format&fit=crop",
+                img: "https://images.unsplash.com/photo-1519337265831-281ec6cc8514?q=80&w=1200&auto=format&fit=crop&fm=avif",
                 tags: ["Next.js","Stripe","Postgres"],
               },
               {
                 title: "Customer Churn Prediction",
                 desc: "ML model with Power BI dashboard.",
-                img: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop",
+                img: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop&fm=avif",
                 tags: ["Python","Pandas","ML"],
               },
             ].map((p) => (

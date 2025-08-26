@@ -10,6 +10,7 @@ const sections = ["hero", "about", "skills", "projects", "experience", "testimon
 export default function NavBar() {
   const [active, setActive] = useState<string>("hero");
   const [scrolled, setScrolled] = useState<boolean>(false);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -42,16 +43,42 @@ export default function NavBar() {
           <motion.ul initial="hidden" animate="show" variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05 } } }} className="flex gap-6">
             {sections.map((id) => (
               <motion.li key={id} variants={{ hidden: { opacity: 0, y: -6 }, show: { opacity: 1, y: 0 } }}>
-                <a href={`#${id}`} className={`group relative hover:opacity-90 ${active === id ? "text-cyan-600 dark:text-cyan-400" : ""}`}>
-                  <span>{id.charAt(0).toUpperCase() + id.slice(1)}</span>
-                  <span className={`pointer-events-none absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 bg-current transition-transform duration-300 ${active === id ? "scale-x-100" : "group-hover:scale-x-100"}`}></span>
-                </a>
+                {id === "blog" ? (
+                  <Link href="/blog" className="group relative hover:opacity-90">
+                    <span>Blog</span>
+                    <span className="pointer-events-none absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 bg-current transition-transform duration-300 group-hover:scale-x-100"></span>
+                  </Link>
+                ) : (
+                  <a href={`#${id}`} className={`group relative hover:opacity-90 ${active === id ? "text-cyan-600 dark:text-cyan-400" : ""}`}>
+                    <span>{id.charAt(0).toUpperCase() + id.slice(1)}</span>
+                    <span className={`pointer-events-none absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 bg-current transition-transform duration-300 ${active === id ? "scale-x-100" : "group-hover:scale-x-100"}`}></span>
+                  </a>
+                )}
               </motion.li>
             ))}
           </motion.ul>
         </nav>
-        <ThemeToggle />
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <button className="sm:hidden rounded-md border px-3 py-1.5 text-sm" aria-label="Menu" onClick={() => setMenuOpen((o) => !o)}>Menu</button>
+        </div>
       </div>
+      {/* Mobile menu */}
+      <motion.div initial={false} animate={menuOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }} className="sm:hidden overflow-hidden border-t border-black/10 dark:border-white/10">
+        <ul className="px-6 py-3 space-y-2">
+          {sections.map((id) => (
+            <li key={id}>
+              {id === "blog" ? (
+                <Link href="/blog" className="block py-1" onClick={() => setMenuOpen(false)}>Blog</Link>
+              ) : (
+                <a href={`#${id}`} className={`block py-1 ${active === id ? "text-cyan-600 dark:text-cyan-400" : ""}`} onClick={() => setMenuOpen(false)}>
+                  {id.charAt(0).toUpperCase() + id.slice(1)}
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+      </motion.div>
     </header>
   );
 }
