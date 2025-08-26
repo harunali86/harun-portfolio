@@ -1,6 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Typewriter from "./components/Typewriter";
+import BackToTop from "./components/BackToTop";
 
 const container = {
   hidden: { opacity: 0 },
@@ -25,7 +27,9 @@ export default function Home() {
             <p className="text-sm uppercase tracking-widest text-cyan-500">Portfolio</p>
             <h1 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight">
               Harun Shaikh
-              <span className="block text-balance text-zinc-500 dark:text-zinc-400 text-lg sm:text-xl mt-3">Full Stack Developer · Data Analyst · Software Engineer</span>
+              <span className="block text-balance text-zinc-500 dark:text-zinc-400 text-lg sm:text-xl mt-3">
+                <Typewriter words={["Full Stack Developer", "Data Analyst", "Software Engineer"]} />
+              </span>
             </h1>
             <div className="mt-8 flex gap-4">
               <a href="#projects" className="inline-flex items-center rounded-md border px-5 py-2.5 text-sm hover:scale-[1.02] transition">
@@ -125,6 +129,7 @@ export default function Home() {
           <p>LinkedIn: <a className="text-cyan-600 dark:text-cyan-400 hover:underline" href="https://www.linkedin.com/in/harun-shaikh-0947751ba" target="_blank" rel="noreferrer">linkedin.com/in/harun-shaikh</a></p>
         </div>
       </section>
+      <BackToTop />
     </main>
   );
 }
