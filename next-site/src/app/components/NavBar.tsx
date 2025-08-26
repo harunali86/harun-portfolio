@@ -9,6 +9,7 @@ const sections = ["hero", "about", "skills", "projects", "experience", "testimon
 
 export default function NavBar() {
   const [active, setActive] = useState<string>("hero");
+  const [scrolled, setScrolled] = useState<boolean>(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -26,17 +27,24 @@ export default function NavBar() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/40 dark:supports-[backdrop-filter]:bg-black/30 border-b border-black/10 dark:border-white/10">
+    <header className={`sticky top-0 z-50 backdrop-blur border-b ${scrolled ? "bg-white/60 dark:bg-black/40 shadow-sm border-black/10 dark:border-white/10" : "supports-[backdrop-filter]:bg-white/40 dark:supports-[backdrop-filter]:bg-black/30 border-transparent"}`}>
       <div className="container mx-auto px-6 h-14 flex items-center justify-between">
         <HSLogo />
         <nav className="hidden sm:flex gap-6 text-sm">
           <motion.ul initial="hidden" animate="show" variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05 } } }} className="flex gap-6">
             {sections.map((id) => (
               <motion.li key={id} variants={{ hidden: { opacity: 0, y: -6 }, show: { opacity: 1, y: 0 } }}>
-                <a href={`#${id}`} className={`relative hover:opacity-90 ${active === id ? "text-cyan-600 dark:text-cyan-400" : ""}`}>
+                <a href={`#${id}`} className={`group relative hover:opacity-90 ${active === id ? "text-cyan-600 dark:text-cyan-400" : ""}`}>
                   <span>{id.charAt(0).toUpperCase() + id.slice(1)}</span>
-                  <span className={`absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 bg-current transition-transform duration-300 ${active === id ? "scale-x-100" : "group-hover:scale-x-100"}`}></span>
+                  <span className={`pointer-events-none absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 bg-current transition-transform duration-300 ${active === id ? "scale-x-100" : "group-hover:scale-x-100"}`}></span>
                 </a>
               </motion.li>
             ))}
