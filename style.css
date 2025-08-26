@@ -12,6 +12,36 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   scroll-behavior: smooth;
 }
+.nav {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  backdrop-filter: blur(8px);
+  background: rgba(13,13,13,0.6);
+  border-bottom: 1px solid #1f1f1f;
+  z-index: 1000;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  padding: 12px 20px;
+  margin: 0 auto;
+}
+.nav .logo {
+  color: var(--neon-color);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.nav .nav-links a {
+  color: var(--text-color);
+  text-decoration: none;
+  margin-left: 16px;
+  transition: color 0.3s ease;
+}
+.nav .nav-links a:hover { color: var(--neon-color); }
 .hero {
   display: flex;
   flex-direction: column;
@@ -19,17 +49,29 @@ body {
   justify-content: center;
   height: 100vh;
   text-align: center;
-  background: radial-gradient(circle, #111 30%, #000 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(600px 300px at 20% 20%, rgba(0,247,255,0.15), transparent 60%),
+              radial-gradient(600px 300px at 80% 30%, rgba(255,0,224,0.15), transparent 60%),
+              radial-gradient(600px 300px at 50% 80%, rgba(0,255,128,0.12), transparent 60%);
+  transform: translateZ(0);
+  animation: aurora 12s ease-in-out infinite alternate;
 }
 .neon-text {
   font-size: 3rem;
   color: var(--neon-color);
   text-shadow: 0 0 10px var(--neon-color), 0 0 20px var(--neon-color);
   animation: flicker 2s infinite alternate;
+  position: relative;
 }
 .subtitle {
   font-size: 1.2rem;
   margin-bottom: 20px;
+  position: relative;
 }
 .neon-button {
   padding: 10px 20px;
@@ -39,6 +81,7 @@ body {
   text-decoration: none;
   border-radius: 8px;
   transition: all 0.3s ease;
+  position: relative;
 }
 .neon-button:hover {
   background: var(--neon-color);
@@ -52,6 +95,7 @@ body {
   opacity: 0;
   transform: translateY(20px);
   transition: all 1s ease;
+  scroll-margin-top: 80px;
 }
 .section.reveal {
   opacity: 1;
@@ -79,6 +123,36 @@ body {
   transform: scale(1.05);
   box-shadow: 0 0 20px var(--neon-color);
 }
+.reveal-item {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: all 0.7s ease;
+}
+.reveal-item.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+.project-card {
+  padding: 0;
+  overflow: hidden;
+  perspective: 1000px;
+}
+.card-media {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.05);
+  transition: transform 0.6s ease;
+}
+.project-card:hover .card-media img {
+  transform: scale(1.12) rotate3d(0.2, 0.6, 0, 2deg);
+}
+.card-content { padding: 16px; }
 .footer {
   text-align: center;
   padding: 20px;
@@ -102,4 +176,12 @@ body {
 @keyframes flicker {
   0% { opacity: 1; }
   100% { opacity: 0.8; }
+}
+@keyframes aurora {
+  0% { transform: translate3d(-2%, -2%, 0) scale(1); }
+  100% { transform: translate3d(2%, 2%, 0) scale(1.05); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
 }
