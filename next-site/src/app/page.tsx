@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Typewriter from "./components/Typewriter";
 import BackToTop from "./components/BackToTop";
+import ContactSection from "./components/ContactSection";
 
 const container = {
   hidden: { opacity: 0 },
@@ -122,13 +123,7 @@ export default function Home() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="container mx-auto px-6 py-20">
-        <h2 className="text-2xl sm:text-3xl font-semibold">Contact</h2>
-        <div className="mt-4 space-y-2 text-sm">
-          <p>Email: <a className="text-cyan-600 dark:text-cyan-400 hover:underline" href="mailto:Harun.ilahi.shaikh@gmail.com">Harun.ilahi.shaikh@gmail.com</a></p>
-          <p>LinkedIn: <a className="text-cyan-600 dark:text-cyan-400 hover:underline" href="https://www.linkedin.com/in/harun-shaikh-0947751ba" target="_blank" rel="noreferrer">linkedin.com/in/harun-shaikh</a></p>
-        </div>
-      </section>
+      <ContactSection />
       <BackToTop />
     </main>
   );
