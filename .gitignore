@@ -1,0 +1,19 @@
+node_modules/
+.next/
+out/
+.vercel/
+dist/
+*.log
+*.log.*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+
+# Never commit build output to main
+/_next
+/index.html
+/robots.txt
+/sitemap*.xml
+/blog.html
+/blog.txt
