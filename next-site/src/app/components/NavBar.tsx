@@ -49,10 +49,10 @@ export default function NavBar() {
                     <span className="pointer-events-none absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 bg-current transition-transform duration-300 group-hover:scale-x-100"></span>
                   </Link>
                 ) : (
-                  <a href={`#${id}`} className={`group relative hover:opacity-90 ${active === id ? "text-cyan-600 dark:text-cyan-400" : ""}`}>
+                  <Link href={`/#${id}`} className={`group relative hover:opacity-90 ${active === id ? "text-cyan-600 dark:text-cyan-400" : ""}`}>
                     <span>{id.charAt(0).toUpperCase() + id.slice(1)}</span>
                     <span className={`pointer-events-none absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 bg-current transition-transform duration-300 ${active === id ? "scale-x-100" : "group-hover:scale-x-100"}`}></span>
-                  </a>
+                  </Link>
                 )}
               </motion.li>
             ))}
@@ -71,9 +71,9 @@ export default function NavBar() {
               {id === "blog" ? (
                 <Link href="/blog" className="block py-1" onClick={() => setMenuOpen(false)}>Blog</Link>
               ) : (
-                <a href={`#${id}`} className={`block py-1 ${active === id ? "text-cyan-600 dark:text-cyan-400" : ""}`} onClick={() => setMenuOpen(false)}>
+                <Link href={`/#${id}`} className={`block py-1 ${active === id ? "text-cyan-600 dark:text-cyan-400" : ""}`} onClick={() => setMenuOpen(false)}>
                   {id.charAt(0).toUpperCase() + id.slice(1)}
-                </a>
+                </Link>
               )}
             </li>
           ))}
