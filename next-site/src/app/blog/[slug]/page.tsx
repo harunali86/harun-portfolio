@@ -1,4 +1,5 @@
 import { getAllPosts, getPost } from "../posts";
+import HashRedirect from "../HashRedirect";
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -16,6 +17,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   const post = await getPost(slug);
   return (
     <main className="container mx-auto px-6 py-20">
+      <HashRedirect />
       <article className="prose prose-zinc dark:prose-invert max-w-none">
         <h1>{post.meta.title}</h1>
         <p className="opacity-70 text-sm">{post.meta.date}</p>

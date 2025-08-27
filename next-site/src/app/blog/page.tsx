@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getAllPosts } from "./posts";
+import HashRedirect from "./HashRedirect";
 
 export const metadata = {
   title: "Blog",
@@ -10,6 +11,7 @@ export default async function BlogList() {
   const posts = await getAllPosts();
   return (
     <main className="container mx-auto px-6 py-20">
+      <HashRedirect />
       <h1 className="text-2xl sm:text-3xl font-semibold">Blog</h1>
       <div className="mt-6 grid gap-6 sm:grid-cols-2">
         {posts.map((post) => (
